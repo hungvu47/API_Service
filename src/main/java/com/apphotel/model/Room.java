@@ -25,7 +25,7 @@ public class Room {
 	@Column(name = "room_id")
 	private Long id;
 	private BigDecimal roomPrice;
-	private boolean isBooked = false;
+//	private boolean isBooked = false;
 	private String roomName;
 	private String description;
 	
@@ -45,7 +45,7 @@ public class Room {
 		}
 		bookedRooms.add(booking);
 		booking.setRoom(this);
-		isBooked = true;
+//		isBooked = true;
 		String bookingCode = RandomStringUtils.randomNumeric(10);
 		booking.setConfirmCode(bookingCode);
 	}
