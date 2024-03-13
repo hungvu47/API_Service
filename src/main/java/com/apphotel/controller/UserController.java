@@ -23,7 +23,7 @@ public class UserController {
 	private IUserService userService;
 
 	@GetMapping("/all-users")
-	@PreAuthorize("hasRole('ADMIN')")
+//	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<List<User>> getUsers() {
 		return new ResponseEntity<>(userService.getUsers(), HttpStatus.FOUND);
 	}

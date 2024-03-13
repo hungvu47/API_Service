@@ -36,7 +36,7 @@ public class BookingController {
 	@GetMapping("/all-bookings")
 	public ResponseEntity<List<BookingResponse>> getAllBookingRooms() {
 	    List<BookedRoom> bookedRooms = iBookingService.getAllBookings();
-	    
+
 	    List<BookingResponse> bookingResponses = bookedRooms.stream()
 	        .map(this::getBookingResponse)
 	        .collect(Collectors.toList());
@@ -59,9 +59,11 @@ public class BookingController {
 
 	private BookingResponse getBookingResponse(BookedRoom bookedRoom) {
 		Room theRoom = iRoomService.getRoomById(bookedRoom.getRoom().getId()).get();
-		RoomResponse roomResponse = new RoomResponse(theRoom.getId(), theRoom.getRoomType(), theRoom.getRoomPrice());
+		RoomResponse roomResponse = new RoomResponse(theRoom.getId(), theRoom.getRoomPrice(),
+				theRoom.getRoomName(), theRoom.getRoomNumber(), theRoom.getDescription(),
+				theRoom.getTypeRoom());
 
-		return new BookingResponse(bookedRoom.getId(), bookedRoom.getCheckIn(), 
+		return new BookingResponse(bookedRoom.getId(), bookedRoom.getCheckIn(),
 				bookedRoom.getCheckOut(),
 				bookedRoom.getGuestFullName(), bookedRoom.getGuestEmail(), bookedRoom.getNumOfAdults(),
 				bookedRoom.getNumOfChildren(), bookedRoom.getTotalNumOfGuest(), bookedRoom.getConfirmCode(), roomResponse);
@@ -80,7 +82,7 @@ public class BookingController {
 	 @GetMapping("/user/{email}/bookings")
 	 public ResponseEntity<List<BookingResponse>> getBookingsByUserEmail(@PathVariable String email) {
 		    List<BookedRoom> bookings = iBookingService.getBookingsByUserEmail(email);
-		    
+
 		    List<BookingResponse> bookingResponses = bookings.stream()
 		        .map(this::getBookingResponse)
 		        .collect(Collectors.toList());

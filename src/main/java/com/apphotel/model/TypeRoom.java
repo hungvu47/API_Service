@@ -13,11 +13,11 @@ public class TypeRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "type_room_id")
-    private Long id;
+    private Long typeRoomId;
 
     @Column(name = "type_room_name")
     private String name;
 
-    @OneToMany(mappedBy = "typeRoom")
-    private List<Room> rooms;
+//    @OneToMany(mappedBy = "typeRoom")
+//    private List<Room> rooms;
 }

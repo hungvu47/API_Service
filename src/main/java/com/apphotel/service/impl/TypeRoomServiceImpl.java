@@ -50,4 +50,9 @@ public class TypeRoomServiceImpl implements ITypeRoomService {
             typeRoomRepository.deleteById(id);
         }
     }
+
+    @Override
+    public TypeRoom findById(Long typeRoomId) {
+        return typeRoomRepository.findById(typeRoomId).orElse(null);
+    }
 }

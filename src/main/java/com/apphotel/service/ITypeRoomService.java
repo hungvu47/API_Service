@@ -13,4 +13,6 @@ public interface ITypeRoomService {
     TypeRoom updateTypeRoom(Long id, TypeRoom typeRoom);
 
     void deleteTypeRoom(Long id);
+
+    TypeRoom findById(Long typeRoomId);
 }

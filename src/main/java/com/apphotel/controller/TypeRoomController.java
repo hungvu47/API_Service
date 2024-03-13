@@ -13,15 +13,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/typeroom")
+@RequestMapping("/api/roomtype")
 public class TypeRoomController {
 
     @Autowired
     private ITypeRoomService typeRoomService;
 
-    @GetMapping("/all-type-rooms")
+    @GetMapping("/all-room-type")
     public ResponseEntity<List<TypeRoom>> getAllTypeRooms()  {
-        return new ResponseEntity<>(typeRoomService.getAllTypeRooms(), HttpStatus.FOUND);
+        List<TypeRoom> roomTypes = typeRoomService.getAllTypeRooms();
+        return new ResponseEntity<>(roomTypes, HttpStatus.OK);
     }
 
     @PostMapping("/add")
@@ -30,7 +31,7 @@ public class TypeRoomController {
         try {
             TypeRoom addedTypeRoom = typeRoomService.addTypeRoom(typeRoom);
 
-            TypeRoomResponse response = new TypeRoomResponse(addedTypeRoom.getId(), addedTypeRoom.getName());
+            TypeRoomResponse response = new TypeRoomResponse(addedTypeRoom.getTypeRoomId(), addedTypeRoom.getName());
             return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(new TypeRoomResponse(), HttpStatus.BAD_REQUEST);
@@ -43,7 +44,7 @@ public class TypeRoomController {
                                                            @RequestBody TypeRoom typeRoom) {
         try {
             TypeRoom updatedTypeRoom = typeRoomService.updateTypeRoom(id, typeRoom);
-            TypeRoomResponse response = new TypeRoomResponse(updatedTypeRoom.getId(), updatedTypeRoom.getName());
+            TypeRoomResponse response = new TypeRoomResponse(updatedTypeRoom.getTypeRoomId(), updatedTypeRoom.getName());
             return new ResponseEntity<>(response, HttpStatus.OK);
         }catch (RuntimeException e) {
             return new ResponseEntity<>(new TypeRoomResponse(), HttpStatus.BAD_REQUEST);

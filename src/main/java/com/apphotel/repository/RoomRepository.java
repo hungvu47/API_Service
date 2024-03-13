@@ -10,15 +10,17 @@ import com.apphotel.model.Room;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
-	@Query("SELECT DISTINCT r.roomType FROM Room r")
-	List<String> findRoomTypes();
-	
-	   @Query(" SELECT r FROM Room r " +
-	            " WHERE r.roomType LIKE %:roomType% " +
-	            " AND r.id NOT IN (" +
-	            "  SELECT br.room.id FROM BookedRoom br " +
-	            "  WHERE ((br.checkIn <= :checkOut) AND (br.checkOut >= :checkIn))" +
-	            ")")
-	    List<Room> findAvailableRooms(LocalDate checkIn, LocalDate checkOut, String roomType);
+    boolean existsByRoomNumber(String roomNumber);
+
+//	@Query("SELECT DISTINCT r.typeRoom FROM Room r")
+//	List<String> findRoomTypes();
+//
+//	   @Query(" SELECT r FROM Room r " +
+//	            " WHERE r.typeRoom LIKE %:roomType% " +
+//	            " AND r.id NOT IN (" +
+//	            "  SELECT br.room.id FROM BookedRoom br " +
+//	            "  WHERE ((br.checkIn <= :checkOut) AND (br.checkOut >= :checkIn))" +
+//	            ")")
+//	    List<Room> findAvailableRooms(LocalDate checkIn, LocalDate checkOut, String roomType);
 
 }
